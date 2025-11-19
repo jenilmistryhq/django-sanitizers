@@ -1,5 +1,5 @@
 [project]
-name = "django-sanitizer"
+name = "django-sanitizers"
 version = "0.0.1"
 description = "A Django middleware that sanitizes incoming request data to prevent XSS."
 readme = "README.md"
@@ -25,3 +25,7 @@ classifiers = [
 [build-system]
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["django_sanitizers"]
+exclude = ["core*", "config*"]
