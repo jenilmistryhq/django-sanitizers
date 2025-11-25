@@ -40,7 +40,7 @@ Add the middleware to your Django settings:
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "django_sanitizer.middleware.SanitizerMiddleware",
+    "django_sanitizers.middleware.SanitizerMiddleware",
     "django.middleware.common.CommonMiddleware",
     ...
 ]
