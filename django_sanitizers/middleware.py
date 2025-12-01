@@ -7,7 +7,11 @@ class SanitizerMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
         self.config = getattr(settings, 'SANITIZER_CONFIG', {})
-        self.SKIP_FIELDS = set(self.config.get('SKIP_FIELDS', set())) 
+        self.SKIP_FIELDS = set(self.config.get(
+            'SKIP_FIELDS', 
+            # Default includes the critical fields if config is missing
+            {'password', 'password_confirmation', 'token', 'access_token', 'refresh_token'}
+        ))
 
     def __call__(self, request):
         if request.method in ("POST", "PUT", "PATCH"):
