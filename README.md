@@ -54,20 +54,12 @@ Add to `settings.py` only if you want customization:
 
 ```python
 SANITIZER_ENABLED = True
-
-SANITIZER_ALLOWED_TAGS = [
-    "b", "i", "u", "a", "em", "strong", "p",
-    "ul", "ol", "li", "br", "img"
-]
-
-SANITIZER_ALLOWED_ATTRIBUTES = {
-    "a": ["href", "title", "rel"],
-    "img": ["src", "alt"],
-}
-
+SANITIZER_ALLOWED_TAGS = ["b", "i", "u", "em", "strong", "a", "br", "p", "ul", "ol", "li",]
+SANITIZER_ALLOWED_ATTRIBUTES = {"a": ["href", "title", "rel"]}
 SANITIZER_STRIP = True
 SANITIZER_SANITIZE_RESPONSE_HTML = False
-SANITIZER_DEBUG = False
+SANITIZER_DEBUG = True
+SANITIZER_SKIP_FIELDS = {'password', 'password_confirmation', 'token', 'access_token', 'refresh_token','secret_key'}
 ```
 
 ---
@@ -154,8 +146,7 @@ django_sanitizer/
 │
 ├── __init__.py
 ├── sanitizer.py
-├── middleware.py
-└── utils.py
+└── middleware.py
 ```
 
 ---
@@ -174,22 +165,6 @@ Run tests:
 ```bash
 pytest
 ```
-
----
-
-## 📦 Publishing to PyPI
-
-```bash
-python -m build
-twine upload dist/*
-```
-
----
-
-## 📄 License
-
-MIT License © 2025
-Free to use, modify, and integrate into commercial apps.
 
 ---
 
