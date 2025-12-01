@@ -7,6 +7,19 @@ Built with **Bleach**, easy to install, easy to extend, and safe by default.
 
 ---
 
+## 🛡 How It Works
+
+The middleware intercepts the request before it reaches your views:
+
+1. Extracts request data (JSON, form-data, GET params)
+2. Sanitizes all values using allowed tags + attributes
+3. Places sanitized result in `request.sanitized_data`
+4. Your view receives **only safe data**
+
+This allows **cleaning without modifying Django internals**.
+
+---
+
 ## 🚀 Features
 
 * 🔒 Sanitizes **JSON bodies**, **form-data**, and **query parameters**
@@ -59,7 +72,7 @@ SANITIZER_ALLOWED_ATTRIBUTES = {"a": ["href", "title", "rel"]}
 SANITIZER_STRIP = True
 SANITIZER_SANITIZE_RESPONSE_HTML = False
 SANITIZER_DEBUG = True
-SANITIZER_SKIP_FIELDS = {'password', 'password_confirmation', 'token', 'access_token', 'refresh_token','secret_key'}
+SANITIZER_SKIP_FIELDS = {'password', 'password_confirmation', 'token', 'access_token', 'refresh_token','secret_key'} # CRITICAL: If this line is missing or empty, no fields will be skipped.
 ```
 
 ---
@@ -123,19 +136,6 @@ You should receive:
 ```json
 {"bio":"hello"}
 ```
-
----
-
-## 🛡 How It Works
-
-The middleware intercepts the request before it reaches your views:
-
-1. Extracts request data (JSON, form-data, GET params)
-2. Sanitizes all values using allowed tags + attributes
-3. Places sanitized result in `request.sanitized_data`
-4. Your view receives **only safe data**
-
-This allows **cleaning without modifying Django internals**.
 
 ---
 
