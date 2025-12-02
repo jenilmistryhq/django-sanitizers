@@ -66,13 +66,21 @@ MIDDLEWARE = [
 Add to `settings.py` only if you want customization:
 
 ```python
-SANITIZER_ENABLED = True
-SANITIZER_ALLOWED_TAGS = ["b", "i", "u", "em", "strong", "a", "br", "p", "ul", "ol", "li",]
-SANITIZER_ALLOWED_ATTRIBUTES = {"a": ["href", "title", "rel"]}
-SANITIZER_STRIP = True
-SANITIZER_SANITIZE_RESPONSE_HTML = False
-SANITIZER_DEBUG = True
-SANITIZER_SKIP_FIELDS = {'password', 'password_confirmation', 'token', 'access_token', 'refresh_token','secret_key'} # CRITICAL: If this line is missing or empty, no fields will be skipped.
+SANITIZER_CONFIG = {
+    # Define exactly which tags you want to KEEP
+    'ALLOWED_TAGS': ['b', 'i', 'u', 'p', 'br'], 
+    
+    # Define allowed attributes (optional)
+    'ALLOWED_ATTRIBUTES': {
+        'a': ['href', 'title'],
+        'img': ['src', 'alt']
+    },
+    
+    # Security fields to skip
+    'SKIP_FIELDS': {'password', 'password_confirmation', 'token', 'access_token', 'refresh_token','secret_key'},
+    
+    'STRIP': True
+}
 ```
 
 ---
